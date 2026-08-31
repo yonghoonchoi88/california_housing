@@ -65,20 +65,14 @@ df["dist_city"] = df[["dist_SF", "dist_LA"]].min(axis=1)
 
 # print(df.corr()["MedHouseVal"].drop("MedHouseVal").sort_values(key=abs, ascending=False))
 
-# 6. 데이터 학습 준비.
+# 6. 데이터 // 준비 // 학습 // 예측
 X = df.drop(columns=["MedHouseVal"])
 y = df["MedHouseVal"]
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 scaler = StandardScaler()
 m = LinearRegression()
-
-pipe = make_pipeline(
-    scaler,
-    m
-)
-
+pipe = make_pipeline(scaler, m)
 pipe.fit(X_train, y_train)
-
 y_pred = pipe.predict(X_test)
 
 # 7. 평가

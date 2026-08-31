@@ -1,1 +1,5 @@
 # california_housing
+
+MAE Score :  0.4795810828351436
+RMSE Value :  0.6635446409388353
+R2 Score :  0.6640045223822432
