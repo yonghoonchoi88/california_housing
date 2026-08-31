@@ -2,7 +2,6 @@ import pandas as pd
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
-from pandas.core.interchange import column
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.model_selection import train_test_split
@@ -60,9 +59,11 @@ df["Households"] = df["Population"] / df["AveOccup"]
 
 # 5-2. dis to LA & SF // 도심까지의 거리
 SF, LA = (37.77, -122.42), (34.05, -118.24)
-df["dist_SF"]   = np.sqrt((df["Latitude"] - SF[0])**2 + (df["Longitude"] - SF[1])**2)
-df["dist_LA"]   = np.sqrt((df["Latitude"] - LA[0])**2 + (df["Longitude"] - LA[1])**2)
+df["dist_SF"] = np.sqrt((df["Latitude"] - SF[0]) ** 2 + (df["Longitude"] - SF[1]) ** 2)
+df["dist_LA"] = np.sqrt((df["Latitude"] - LA[0]) ** 2 + (df["Longitude"] - LA[1]) ** 2)
 df["dist_city"] = df[["dist_SF", "dist_LA"]].min(axis=1)
+
+# print(df.corr()["MedHouseVal"].drop("MedHouseVal").sort_values(key=abs, ascending=False))
 
 # 6. 데이터 학습 준비.
 X = df.drop(columns=["MedHouseVal"])
@@ -71,7 +72,10 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 scaler = StandardScaler()
 m = LinearRegression()
 
-pipe = make_pipeline(scaler, m)
+pipe = make_pipeline(
+    scaler,
+    m
+)
 
 pipe.fit(X_train, y_train)
 
