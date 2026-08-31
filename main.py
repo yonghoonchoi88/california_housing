@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
+from pandas.core.interchange import column
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.model_selection import train_test_split
@@ -45,7 +46,14 @@ sns.histplot(x=y, bins=50)
 plt.title("Distribution of MedHouseVal", fontsize=20)
 plt.show()
 
-# 5. 데이터 학습 준비.
+# 5. 전처리 (파생변수; 침실비율(여유공간 레벨), 1인당방(여유도), 가구수(동네 규모)
+df["BedrmRatio"] = df["AveBedrms"] / df["AveRooms"]
+df["RoomsPerPerson"] = df["AveRooms"] / df["AveOccup"]
+df["Households"]     = df["Population"] / df["AveOccup"]
+
+# 6. 데이터 학습 준비.
+X = df.drop(columns=["MedHouseVal"])
+y = df["MedHouseVal"]
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 scaler = StandardScaler()
 m = LinearRegression()
@@ -56,7 +64,7 @@ pipe.fit(X_train, y_train)
 
 y_pred = pipe.predict(X_test)
 
-# 6. 평가
+# 7. 평가
 MAE = mean_absolute_error(y_test, y_pred)
 print("MAE Score : ", MAE)
 RMSE = np.sqrt(mean_squared_error(y_test, y_pred))
