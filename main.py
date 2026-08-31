@@ -39,10 +39,19 @@ print(df.isna().sum())
 print("\nCorr with 'MedHouseVal':")
 print(df.corr()["MedHouseVal"].drop("MedHouseVal").sort_values(key=abs, ascending=False))
 
-plt.figure(figsize=(10, 10))
-sns.histplot(x=y, bins=50)
-plt.title("Distribution of MedHouseVal", fontsize=20)
-plt.show()
+# plt.figure(figsize=(10, 10))
+# sns.histplot(x=y, bins=50)
+# plt.title("Distribution of MedHouseVal", fontsize=20)
+# fig, axes = plt.subplots(2, 2, figsize=(10, 10))
+# sns.histplot(x=df["AveRooms"], ax=axes[0, 0], bins=50)
+# sns.histplot(x=df["AveBedrms"], ax=axes[0, 1], bins=50)
+# sns.histplot(x=df["AveOccup"], ax=axes[1, 0], bins=50)
+# sns.histplot(x=df["Population"], ax=axes[1, 1], bins=50)
+# plt.tight_layout()
+# plt.show()
+fetures = ["AveRooms", "AveBedrms", "AveOccup", "Population"]
+print(df[fetures].describe(percentiles=[.5, .9, .95, .99, .999]).round(2))
+
 
 # 5. 전처리; (파생변수; 침실비율(여유공간 레벨), 1인당방(여유도), 가구수(동네 규모)
 df["BedrmRatio"] = df["AveBedrms"] / df["AveRooms"]
