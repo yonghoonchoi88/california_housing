@@ -9,9 +9,8 @@ from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.datasets import fetch_california_housing
 
-
 # 1. 데이터 로드
-data = fetch_california_housing(as_frame = True)
+data = fetch_california_housing(as_frame=True)
 X = data.data
 y = data.target
 
@@ -31,18 +30,15 @@ print(df.describe())
 print("\nInfo:")
 print(df.info())
 
-
 # # 3. 결측치 확인
 print("\nNull values:")
 print(df.isna().sum())
-
 
 # 4. 데이터 탐색
 plt.figure(figsize=(10, 10))
 sns.histplot(x=y, bins=50)
 plt.title("Distribution of MedHouseVal", fontsize=20)
 plt.show()
-
 
 # 5. 데이터 학습 준비.
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
@@ -55,12 +51,10 @@ pipe.fit(X_train, y_train)
 
 y_pred = pipe.predict(X_test)
 
-
-
 # 6. 평가
 MAE = mean_absolute_error(y_test, y_pred)
-print("MAE Score : ",MAE)
+print("MAE Score : ", MAE)
 RMSE = np.sqrt(mean_squared_error(y_test, y_pred))
-print("RMSE Value : ",RMSE)
+print("RMSE Value : ", RMSE)
 R2_val = r2_score(y_test, y_pred)
-print("R2 Score : ",R2_val)
+print("R2 Score : ", R2_val)
