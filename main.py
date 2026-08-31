@@ -19,25 +19,25 @@ df = X.copy()
 df["MedHouseVal"] = y
 df.to_csv("california_housing.csv", index=False)
 
-# # 2. 데이터 정보 확인.
-print("Shape:")
-print(df.shape)
-print(df.shape)
-print(df.head())
-
-print("\nDescribe:")
-print(df.describe())
-
-print("\nInfo:")
-print(df.info())
-
-# # 3. 결측치 확인
-print("\nNull values:")
-print(df.isna().sum())
-
-# 4. 데이터 탐색
-print("\nCorr with 'MedHouseVal':")
-print(df.corr()["MedHouseVal"].drop("MedHouseVal").sort_values(key=abs, ascending=False))
+# # # 2. 데이터 정보 확인.
+# print("Shape:")
+# print(df.shape)
+# print(df.shape)
+# print(df.head())
+#
+# print("\nDescribe:")
+# print(df.describe())
+#
+# print("\nInfo:")
+# print(df.info())
+#
+# # # 3. 결측치 확인
+# print("\nNull values:")
+# print(df.isna().sum())
+#
+# # 4. 데이터 탐색
+# print("\nCorr with 'MedHouseVal':")
+# print(df.corr()["MedHouseVal"].drop("MedHouseVal").sort_values(key=abs, ascending=False))
 
 # plt.figure(figsize=(10, 10))
 # sns.histplot(x=y, bins=50)
@@ -49,14 +49,20 @@ print(df.corr()["MedHouseVal"].drop("MedHouseVal").sort_values(key=abs, ascendin
 # sns.histplot(x=df["Population"], ax=axes[1, 1], bins=50)
 # plt.tight_layout()
 # plt.show()
-fetures = ["AveRooms", "AveBedrms", "AveOccup", "Population"]
-print(df[fetures].describe(percentiles=[.5, .9, .95, .99, .999]).round(2))
+# fetures = ["AveRooms", "AveBedrms", "AveOccup", "Population"]
+# print(df[fetures].describe(percentiles=[.5, .9, .95, .99, .999]).round(2))
 
 
-# 5. 전처리; (파생변수; 침실비율(여유공간 레벨), 1인당방(여유도), 가구수(동네 규모)
+# 5-1. 전처리; (파생변수; 침실비율(여유공간 레벨), 1인당방(여유도), 가구수(동네 규모)
 df["BedrmRatio"] = df["AveBedrms"] / df["AveRooms"]
 df["RoomsPerPerson"] = df["AveRooms"] / df["AveOccup"]
 df["Households"] = df["Population"] / df["AveOccup"]
+
+# 5-2. dis to LA & SF // 도심까지의 거리
+SF, LA = (37.77, -122.42), (34.05, -118.24)
+df["dist_SF"]   = np.sqrt((df["Latitude"] - SF[0])**2 + (df["Longitude"] - SF[1])**2)
+df["dist_LA"]   = np.sqrt((df["Latitude"] - LA[0])**2 + (df["Longitude"] - LA[1])**2)
+df["dist_city"] = df[["dist_SF", "dist_LA"]].min(axis=1)
 
 # 6. 데이터 학습 준비.
 X = df.drop(columns=["MedHouseVal"])
