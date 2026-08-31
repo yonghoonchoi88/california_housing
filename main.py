@@ -30,11 +30,16 @@ print(df.describe())
 print("\nInfo:")
 print(df.info())
 
+
+
 # # 3. 결측치 확인
 print("\nNull values:")
 print(df.isna().sum())
 
 # 4. 데이터 탐색
+print("\nCorr with 'MedHouseVal':")
+print(df.corr()["MedHouseVal"].drop("MedHouseVal").sort_values(key=abs, ascending=False))
+
 plt.figure(figsize=(10, 10))
 sns.histplot(x=y, bins=50)
 plt.title("Distribution of MedHouseVal", fontsize=20)
