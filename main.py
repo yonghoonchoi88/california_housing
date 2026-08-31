@@ -82,3 +82,22 @@ RMSE = np.sqrt(mean_squared_error(y_test, y_pred))
 print("RMSE Value : ", RMSE)
 R2_val = r2_score(y_test, y_pred)
 print("R2 Score : ", R2_val)
+
+
+# 8. README 작성
+with open("README.md", "w", encoding="utf-8") as f:
+    f.write(f"""# California Housing Price Prediction
+
+캘리포니아 주택가격 예측 (선형회귀 // LinearRegression)
+
+## 평가 결과
+
+ MAE : {MAE:.4f}
+
+ RMSE : {RMSE:.4f}
+
+ R² : {R2_val:.4f}
+
+""")
+
+

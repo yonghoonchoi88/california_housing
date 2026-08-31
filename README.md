@@ -1,7 +1,12 @@
-# california_housing
+# California Housing Price Prediction
 
-MAE Score :  0.4795810828351436
+캘리포니아 주택가격 예측 (선형회귀 // LinearRegression)
 
-RMSE Value :  0.6635446409388353
+## 평가 결과
 
-R2 Score :  0.6640045223822432
+ MAE : 0.4796
+
+ RMSE : 0.6635
+
+ R² : 0.6640
+
