@@ -16,6 +16,9 @@ data = fetch_california_housing(as_frame = True)
 X = data.data
 y = data.target
 
+df = X.copy()
+df["MedHouseVal"] = y
+df.to_csv("california_housing.csv", index=False)
 
 # # 2. 데이터 정보 확인.
 # print("Shape:")
@@ -40,9 +43,9 @@ y = data.target
 
 
 # 4. 데이터 탐색
-fig, axes = plt.subplots(figsize=(10, 10))
+plt.figure(figsize=(10, 10))
 sns.histplot(x=y, bins=50)
-plt.title("Distribution of SalePrice", fontsize=20)
+plt.title("Distribution of MedHouseVal", fontsize=20)
 plt.show()
 
 
@@ -66,9 +69,3 @@ RMSE = np.sqrt(mean_squared_error(y_test, y_pred))
 print("RMSE Value : ",RMSE)
 R2_val = r2_score(y_test, y_pred)
 print("R2 Score : ",R2_val)
-
-# 7. 결과 저장
-result = pd.DataFrame({
-    "MedHouseVal": y_pred
-})
-result.to_csv("california_housing.csv", index=False)
