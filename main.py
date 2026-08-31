@@ -31,8 +31,6 @@ print(df.describe())
 print("\nInfo:")
 print(df.info())
 
-
-
 # # 3. 결측치 확인
 print("\nNull values:")
 print(df.isna().sum())
@@ -46,10 +44,10 @@ sns.histplot(x=y, bins=50)
 plt.title("Distribution of MedHouseVal", fontsize=20)
 plt.show()
 
-# 5. 전처리 (파생변수; 침실비율(여유공간 레벨), 1인당방(여유도), 가구수(동네 규모)
+# 5. 전처리; (파생변수; 침실비율(여유공간 레벨), 1인당방(여유도), 가구수(동네 규모)
 df["BedrmRatio"] = df["AveBedrms"] / df["AveRooms"]
 df["RoomsPerPerson"] = df["AveRooms"] / df["AveOccup"]
-df["Households"]     = df["Population"] / df["AveOccup"]
+df["Households"] = df["Population"] / df["AveOccup"]
 
 # 6. 데이터 학습 준비.
 X = df.drop(columns=["MedHouseVal"])
