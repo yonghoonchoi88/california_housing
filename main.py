@@ -10,7 +10,6 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.datasets import fetch_california_housing
 
 
-
 # 1. 데이터 로드
 data = fetch_california_housing(as_frame = True)
 X = data.data
@@ -43,10 +42,10 @@ df.to_csv("california_housing.csv", index=False)
 
 
 # 4. 데이터 탐색
-plt.figure(figsize=(10, 10))
-sns.histplot(x=y, bins=50)
-plt.title("Distribution of MedHouseVal", fontsize=20)
-plt.show()
+# plt.figure(figsize=(10, 10))
+# sns.histplot(x=y, bins=50)
+# plt.title("Distribution of MedHouseVal", fontsize=20)
+# plt.show()
 
 
 # 5. 데이터 학습 준비.
