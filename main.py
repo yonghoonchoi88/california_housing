@@ -20,32 +20,32 @@ df["MedHouseVal"] = y
 df.to_csv("california_housing.csv", index=False)
 
 # # 2. 데이터 정보 확인.
-# print("Shape:")
-# print(X.shape)
-# print(y.shape)
-#
-# print(X.head())
-# print(y.head())
-#
-# print("\nDescribe:")
-# print(X.describe())
-# print(y.describe())
-#
-# print("\nInfo:")
-# print(X.info())
-#
-#
+print("Shape:")
+print(X.shape)
+print(y.shape)
+
+print(X.head())
+print(y.head())
+
+print("\nDescribe:")
+print(X.describe())
+print(y.describe())
+
+print("\nInfo:")
+print(X.info())
+
+
 # # 3. 결측치 확인
-# print("\nNull values:")
-# print(X.isna().sum())
-# print(y.isna().sum())
+print("\nNull values:")
+print(X.isna().sum())
+print(y.isna().sum())
 
 
 # 4. 데이터 탐색
-# plt.figure(figsize=(10, 10))
-# sns.histplot(x=y, bins=50)
-# plt.title("Distribution of MedHouseVal", fontsize=20)
-# plt.show()
+plt.figure(figsize=(10, 10))
+sns.histplot(x=y, bins=50)
+plt.title("Distribution of MedHouseVal", fontsize=20)
+plt.show()
 
 
 # 5. 데이터 학습 준비.
